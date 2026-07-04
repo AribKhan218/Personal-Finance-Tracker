@@ -1,0 +1,189 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f4f5f7;
+  font-family: "poppins";
+}
+
+.container {
+  margin: 80px;
+  padding: 40px;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+}
+.userInput {
+  display: flex;
+  flex-direction: column;
+}
+
+.currBalance {
+  font-size: 60px;
+  font-weight: 700;
+  color: #23c552;
+  /* color: #F84F31; */
+}
+
+.entries {
+  padding: 20px 20px;
+  outline: 2px solid rgb(223, 212, 212);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.inputs {
+  display: flex;
+  gap: 15px;
+}
+
+.desc {
+  padding: 10px 20px;
+  border: none;
+  outline: 1px solid black;
+  border-radius: 10px;
+}
+
+.desc:focus {
+  outline: 2px solid blue;
+}
+
+.amount {
+  padding: 10px 20px;
+  border: none;
+  outline: 1px solid black;
+  border-radius: 10px;
+}
+
+.amount:focus {
+  outline: 2px solid blue;
+}
+
+.datetime {
+  padding: 10px 20px;
+  border: none;
+  outline: 1px solid black;
+  border-radius: 10px;
+}
+
+.datetime:focus {
+  outline: 2px solid blue;
+}
+
+.type {
+  margin-right: 10px;
+  padding: 6px;
+  border: none;
+  outline: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.type:focus {
+  outline: 2px solid blue;
+}
+
+.category {
+  margin-right: 10px;
+  padding: 6px;
+  border: none;
+  outline: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.category:focus {
+  outline: 2px solid blue;
+}
+
+.addBtn {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(47, 47, 255);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.addBtn:hover {
+  background-color: blue;
+  transform: translateY(-2px);
+}
+
+.total {
+  margin: 30px 0;
+}
+
+.income {
+  font-size: 22px;
+  font-weight: 500;
+  color: #23c552;
+}
+.expense {
+  font-size: 22px;
+  font-weight: 500;
+  color: #f84f31;
+}
+
+.makeFlex {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.data {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.search {
+  position: relative;
+}
+.search input {
+  padding: 10px 15px 10px 40px;
+  border: none;
+  outline: 1px solid black;
+  border-radius: 10px;
+}
+
+.search input:focus {
+  outline: 2px solid blue;
+}
+
+.search::before {
+  content: "";
+  cursor: pointer;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-image: url("assets/search.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.find_filter {
+  display: flex;
+  gap: 15px;
+}
+
+.filter {
+  margin-right: 10px;
+  padding: 6px;
+  border: none;
+  outline: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.filter:focus {
+  outline: 2px solid blue;
+}
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="userInput">
+            <div class="currBalance">$57.98</div>
+            <div class="entries">
+                <div class="inputs">
+                    <input type="text" placeholder="Description" class="desc">
+                    <input type="number" placeholder="Amount" class="amount">
+                    <input type="datetime-local" class="datetime">
+                </div>
+                <div class="dropdowns">
+                    <label style="font-weight: 400; font-size: 20px;" for="type">Type:</label>
+                    <select id="type" class="type">
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                        <option value="debt">Debt</option>
+                    </select>
+                    <label style="font-weight: 400; font-size: 20px;" for="category">Category:</label>
+                    <select id="category" class="category">
+                        <option value="salary">Salary</option>
+                        <option value="food">Food</option>
+                        <option value="transport">Transport</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div><button class="addBtn">Add</button></div>
+            </div>
+        </div>
+        <div class="total">
+            <div class="income">Total Income: $95</div>
+            <div class="expense">Total Expense: $40</div>
+        </div>
+        <div class="makeFlex">
+            <div class="data">Data</div>
+            <div class="find_filter">
+                <div class="search"><input type="text" placeholder="Search"></div>
+                <div>
+                    <label style="font-weight: 400; font-size: 20px;" for="filter">Filter:</label>
+                    <select class="filter" id="filter">
+                        <option value="all">All</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="transactions">
+            
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>
