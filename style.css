@@ -205,12 +205,13 @@ body {
   border: 1px solid black;
   position: sticky;
   top: 0;
-  background-color: #ffffff;
+  background-color: #1E293B;
+  color: #ffffff;
   padding: 20px;
   font-size: 20px;
   font-weight: 500;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .transaction-list {
@@ -222,7 +223,24 @@ body {
 
 .transaction {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   padding: 10px 0;
   border-bottom: 1px solid black;
+}
+
+.actions{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.actions .edit, .delete{
+    cursor: pointer;
+}
+
+.actions div{
+    transition: all 0.3s ease;
+}
+.actions div:hover{
+    transform: translateY(-10%)
 }
