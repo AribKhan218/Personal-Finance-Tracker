@@ -5,8 +5,8 @@ const InTimeStamps = document.querySelector(".datetime");
 const InType = document.querySelector(".type");
 const InCategory = document.querySelector(".category");
 const addBtn = document.querySelector(".addBtn");
-const totalIncome = document.querySelector(".income");
-const totalExpense = document.querySelector(".expense");
+const Income = document.querySelector(".income");
+const Expense = document.querySelector(".expense");
 const noData = document.querySelector(".noData");
 const transactions = document.querySelector(".transactions");
 const transactionList = document.querySelector(".transaction-list");
@@ -14,11 +14,14 @@ const actions = document.querySelector(".actions");
 const inputs = document.querySelectorAll("input");
 
 const AllTransactions = [];
+let currentBalance = 0;
+let totalIncome = 0;
+let totalExpense = 0;
 
 function addTransactions() {
   // getting values
   const description = InDescription.value;
-  const amount = InAmount.value;
+  let amount = Number(InAmount.value);
   const timeStamps = InTimeStamps.value;
   const type = InType.value;
   const category = InCategory.value;
@@ -42,6 +45,28 @@ function addTransactions() {
     type,
     category,
   };
+
+  // Total Income
+  if (transaction.type === "income") {
+    totalIncome += amount;
+    console.log(totalIncome);
+    Income.innerHTML = `$${totalIncome}`;
+  }
+  // Total Expense
+  if (transaction.type === "expense") {
+    totalExpense += amount;
+    console.log(totalExpense);
+    Expense.innerHTML = `$${totalExpense}`;
+  }
+  // Current Balance
+  currentBalance = totalIncome - totalExpense;
+  if (currentBalance >= 0) {
+    currBalance.innerHTML = `$${currentBalance}`;
+    currBalance.style.color = "#23c552";
+  } else if (currentBalance < 0) {
+    currBalance.innerHTML = `$${currentBalance}`;
+    currBalance.style.color = "#F84F31";
+  }
 
   // Check for duplicate values
   const isDuplicate = AllTransactions.some((t) => {
@@ -83,3 +108,5 @@ addBtn.addEventListener("click", (e) => {
   addTransactions();
   inputs.forEach((input) => (input.value = ""));
 });
+
+// Add Filter, Search, Edit, Delete, LocalStorage functionalities:

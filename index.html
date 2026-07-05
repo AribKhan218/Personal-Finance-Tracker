@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <div class="userInput">
-            <div class="currBalance">$57.98</div>
+            <div style="font-size: 18px; font-weight: 600;">→ Current Balance: </div><div class="currBalance">$0</div>
             <div class="entries">
                 <div class="inputs">
                     <input type="text" placeholder="Description" class="desc">
@@ -28,7 +28,6 @@
                     <select id="type" class="type">
                         <option value="income">Income</option>
                         <option value="expense">Expense</option>
-                        <option value="debt">Debt</option>
                     </select>
                     <label style="font-weight: 400; font-size: 20px;" for="category">Category:</label>
                     <select id="category" class="category">
@@ -44,8 +43,8 @@
             </div>
         </div>
         <div class="total">
-            <div class="income">Total Income: $95</div>
-            <div class="expense">Total Expense: $40</div>
+            <div class="totalInOut">Total Income: <span class="income">$0</span></div>
+            <div class="totalInOut">Total Expense: <span class="expense">$0</span></div>
         </div>
         <div class="makeFlex">
             <div class="data">Transaction Data</div>
