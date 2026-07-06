@@ -15,20 +15,20 @@ const inputs = document.querySelectorAll("input");
 const InFilter = document.querySelector(".filter");
 const InSearch = document.querySelector(".search input");
 
-const AllTransactions = [];
+let AllTransactions = [];
 
 function renderTransactions(data = AllTransactions) {
   transactionList.innerHTML = "";
   // adding transactions to transaction-list
-  data.forEach((transaction) => {
-    const transactionHTML = `<div class="transaction">
+  data.forEach((transaction, index) => {
+    const transactionHTML = `<div class="transaction" data-index="${index}">
     <div>${transaction.description}</div>
                                     <div>$${transaction.amount}</div>
                                     <div>${transaction.type}</div>
                                     <div>${transaction.category}</div>
                                     <div>${transaction.timeStamps.replace("T", ", ")}</div>
                                     <div class="actions">
-                                        <div><img style="background-size: contain; width: 30px; height: 30px;" class="edit" src="assets/pen.png" alt=""></div>
+                                    <div><img style="background-size: contain; width: 30px; height: 30px;" class="edit" src="assets/pen.png" alt=""></div>
                                         <div><img style="background-size: contain; width: 30px; height: 30px;" class="delete" src="assets/delete.png" alt=""></div>
                                         </div>
                                         </div>`;
@@ -41,20 +41,20 @@ function calculateTotals() {
   let totalIncome = 0;
   let totalExpense = 0;
 
+  // Calculating values
   for (const transaction of AllTransactions) {
     // Total Income
     if (transaction.type === "income") {
       totalIncome += transaction.amount;
-      console.log(totalIncome);
-      Income.innerHTML = `$${totalIncome}`;
     }
     // Total Expense
     if (transaction.type === "expense") {
       totalExpense += transaction.amount;
-      console.log(totalExpense);
-      Expense.innerHTML = `$${totalExpense}`;
     }
   }
+  // Updating values
+  Income.innerHTML = `$${totalIncome}`;
+  Expense.innerHTML = `$${totalExpense}`;
   // Current Balance
   currentBalance = totalIncome - totalExpense;
   if (currentBalance >= 0) {
@@ -67,10 +67,10 @@ function calculateTotals() {
 }
 
 InFilter.addEventListener("change", (e) => {
-  filter();
+  filterTransactions();
 });
 
-function filter() {
+function filterTransactions() {
   let filteredArray;
   let filter = InFilter.value.toLowerCase();
   if (filter === "all") {
@@ -88,10 +88,10 @@ function filter() {
 }
 
 InSearch.addEventListener("input", (e) => {
-  search();
+  searchTransactions();
 });
 
-function search() {
+function searchTransactions() {
   let searchedTransaction;
   let search = InSearch.value.toLowerCase();
   searchedTransaction = AllTransactions.filter((transaction) => {
@@ -157,4 +157,20 @@ addBtn.addEventListener("click", (e) => {
   inputs.forEach((input) => (input.value = ""));
 });
 
-// Add Filter, Search, Edit, Delete, LocalStorage functionalities:
+transactionList.addEventListener("click", (e) => {
+  if (e.target.matches(".delete")) {
+    const transaction = e.target.closest(".transaction");
+
+    deleteTransaction(transaction);
+  }
+});
+function deleteTransaction(target) {
+  const afterDelete = AllTransactions.filter((transaction, i) => {
+    return i != Number(target.dataset.index);
+  });
+  AllTransactions = afterDelete;
+  calculateTotals();
+  renderTransactions(AllTransactions);
+}
+
+// Add Edit, LocalStorage functionalities:
