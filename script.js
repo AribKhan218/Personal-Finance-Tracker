@@ -166,11 +166,39 @@ transactionList.addEventListener("click", (e) => {
 });
 function deleteTransaction(target) {
   const afterDelete = AllTransactions.filter((transaction, i) => {
-    return i != Number(target.dataset.index);
+    return i !== Number(target.dataset.index);
   });
   AllTransactions = afterDelete;
   calculateTotals();
   renderTransactions(AllTransactions);
 }
 
-// Add Edit, LocalStorage functionalities:
+transactionList.addEventListener("click", (e) => {
+  if (e.target.matches(".edit")) {
+    const transaction = e.target.closest(".transaction");
+    editTransaction(transaction);
+    InDescription.focus();
+  }
+});
+
+function editTransaction(target) {
+  const toEdit = AllTransactions.filter((transaction, i) => {
+    return i === Number(target.dataset.index);
+  });
+
+  InDescription.value = toEdit[0].description;
+  InAmount.value = toEdit[0].amount;
+  InTimeStamps.value = toEdit[0].timeStamps;
+  InType.value = toEdit[0].type;
+  InCategory.value = toEdit[0].category;
+
+  const afterEdit = AllTransactions.filter((transaction, i) => {
+    return i !== Number(target.dataset.index);
+  });
+
+  AllTransactions = afterEdit;
+  calculateTotals();
+  renderTransactions(AllTransactions);
+}
+
+// Add LocalStorage functionalities:
