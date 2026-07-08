@@ -16,7 +16,17 @@ const InFilter = document.querySelector(".filter");
 const InSearch = document.querySelector(".search input");
 
 let AllTransactions = [];
-
+// Getting AllTransactions(if any) from the localStorage:
+function loadTransactions() {
+  AllTransactions = JSON.parse(localStorage.getItem("allTransactions")) || [];
+  calculateTotals(AllTransactions);
+  if (AllTransactions.length !== 0) {
+    // displaying transactions UI
+    noData.style.display = "none";
+    transactions.style.display = "block";
+  }
+  renderTransactions(AllTransactions);
+}
 function renderTransactions(data = AllTransactions) {
   transactionList.innerHTML = "";
   // adding transactions to transaction-list
@@ -75,20 +85,22 @@ function filterTransactions() {
   let filter = InFilter.value.toLowerCase();
   if (filter === "all") {
     renderTransactions(AllTransactions);
-  } else if (filter === "expense") {
-    filteredArray = AllTransactions.filter((transaction) => {
-      return transaction.type === "expense";
-    });
-  } else if (filter === "income") {
-    filteredArray = AllTransactions.filter((transaction) => {
-      return transaction.type === "income";
-    });
+  } else {
+    if (
+      filter === "food" ||
+      filter === "shopping" ||
+      filter === "salary" ||
+      filter === "utilities" ||
+      filter === "others"
+    ) {
+      filteredArray = AllTransactions.filter((t) => t.category === filter);
+    }
   }
   renderTransactions(filteredArray);
 }
 
 InSearch.addEventListener("input", (e) => {
-  searchTransactions();
+  debouncedSearch()
 });
 
 function searchTransactions() {
@@ -101,6 +113,19 @@ function searchTransactions() {
   });
   renderTransactions(searchedTransaction);
 }
+
+function debounce(fn, ms) {
+  let timer;
+
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout((...args) => {
+      return fn(...args);
+    }, ms);
+  };
+}
+
+const debouncedSearch = debounce(searchTransactions, 300)
 
 function addTransactions() {
   // getting values
@@ -148,6 +173,7 @@ function addTransactions() {
 
   // adding transaction to AllTransaction
   AllTransactions.push(transaction);
+  saveTransactions();
   calculateTotals();
   renderTransactions();
 }
@@ -160,8 +186,10 @@ addBtn.addEventListener("click", (e) => {
 transactionList.addEventListener("click", (e) => {
   if (e.target.matches(".delete")) {
     const transaction = e.target.closest(".transaction");
-
-    deleteTransaction(transaction);
+    const userConfirmed = confirm("Would you like to delete this transaction?");
+    if (userConfirmed) {
+      deleteTransaction(transaction);
+    }
   }
 });
 function deleteTransaction(target) {
@@ -169,6 +197,7 @@ function deleteTransaction(target) {
     return i !== Number(target.dataset.index);
   });
   AllTransactions = afterDelete;
+  saveTransactions();
   calculateTotals();
   renderTransactions(AllTransactions);
 }
@@ -197,8 +226,15 @@ function editTransaction(target) {
   });
 
   AllTransactions = afterEdit;
+  saveTransactions();
   calculateTotals();
   renderTransactions(AllTransactions);
 }
 
-// Add LocalStorage functionalities:
+// Setting AllTransactions to the localStorage:
+function saveTransactions() {
+  localStorage.setItem("allTransactions", JSON.stringify(AllTransactions));
+}
+
+// calling this function every time the page loads:
+loadTransactions();
