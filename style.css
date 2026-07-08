@@ -115,6 +115,38 @@ body {
   transform: translateY(-2px);
 }
 
+.export {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(15, 218, 8);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.export:hover {
+  background-color: rgb(16, 185, 24);
+  transform: translateY(-2px);
+}
+
+.import{
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(255, 13, 85);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.import:hover{
+  background-color: rgb(216, 10, 72);
+  transform: translateY(-2px);
+}
+
 .total {
   margin: 30px 0;
 }

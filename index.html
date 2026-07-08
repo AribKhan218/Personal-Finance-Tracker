@@ -16,7 +16,8 @@
 <body>
     <div class="container">
         <div class="userInput">
-            <div style="font-size: 18px; font-weight: 600;">→ Current Balance: </div><div class="currBalance">$0</div>
+            <div style="font-size: 18px; font-weight: 600;">→ Current Balance: </div>
+            <div class="currBalance">$0</div>
             <div class="entries">
                 <div class="inputs">
                     <input type="text" placeholder="Description" class="desc">
@@ -39,7 +40,11 @@
                         <option value="others">Others</option>
                     </select>
                 </div>
-                <div><button class="addBtn">Add Transaction</button></div>
+                <div style="display: flex; gap: 12px;">
+                    <div><button class="addBtn">Add Transaction</button></div>
+                    <div><button class="export">Export <span style="font-size: 10px; padding-right: 5px;">.JSON</span>⤒</button></div>
+                    <div><button class="import">Import <span style="font-size: 10px; padding-right: 5px;">.JSON</span>⤓</button></div>
+                </div>
             </div>
         </div>
         <div class="total">
@@ -55,9 +60,13 @@
                     <select class="filter" id="filter">
                         <option value="all">All</option>
                         <option value="salary">Salary</option>
+                        <option value="freelance">Freelance</option>
                         <option value="food">Food</option>
-                        <option value="shopping">Shopping</option>
                         <option value="utilities">Utilities</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="gifts">Gifts</option>
                         <option value="others">Others</option>
                     </select>
                 </div>
@@ -76,7 +85,7 @@
                 <div id="actions">Actions</div>
             </div>
             <div class="transaction-list">
-                
+
             </div>
         </div>
     </div>

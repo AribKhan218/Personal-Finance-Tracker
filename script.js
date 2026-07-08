@@ -14,6 +14,8 @@ const actions = document.querySelector(".actions");
 const inputs = document.querySelectorAll("input");
 const InFilter = document.querySelector(".filter");
 const InSearch = document.querySelector(".search input");
+const exportBtn = document.querySelector(".export");
+const importBtn = document.querySelector(".import");
 
 let AllTransactions = [];
 // Getting AllTransactions(if any) from the localStorage:
@@ -24,6 +26,9 @@ function loadTransactions() {
     // displaying transactions UI
     noData.style.display = "none";
     transactions.style.display = "block";
+  } else if (AllTransactions.length === 0) {
+    noData.style.display = "flex";
+    transactions.style.display = "none";
   }
   renderTransactions(AllTransactions);
 }
@@ -91,6 +96,10 @@ function filterTransactions() {
       filter === "shopping" ||
       filter === "salary" ||
       filter === "utilities" ||
+      filter === "freelance" ||
+      filter === "entertainment" ||
+      filter === "gifts" ||
+      filter === "healthcare" ||
       filter === "others"
     ) {
       filteredArray = AllTransactions.filter((t) => t.category === filter);
@@ -100,7 +109,7 @@ function filterTransactions() {
 }
 
 InSearch.addEventListener("input", (e) => {
-  debouncedSearch()
+  debouncedSearch();
 });
 
 function searchTransactions() {
@@ -114,6 +123,7 @@ function searchTransactions() {
   renderTransactions(searchedTransaction);
 }
 
+// debounce function
 function debounce(fn, ms) {
   let timer;
 
@@ -125,7 +135,7 @@ function debounce(fn, ms) {
   };
 }
 
-const debouncedSearch = debounce(searchTransactions, 300)
+const debouncedSearch = debounce(searchTransactions, 300);
 
 function addTransactions() {
   // getting values
@@ -238,3 +248,33 @@ function saveTransactions() {
 
 // calling this function every time the page loads:
 loadTransactions();
+
+// Exporting JSON:
+exportBtn.addEventListener("click", (e) => {
+  exportData();
+});
+
+async function exportData() {
+  const data = localStorage.getItem("allTransactions");
+  if (!data) {
+    alert("No transaction data available");
+  }
+
+  try {
+    await navigator.clipboard.writeText(data);
+    alert("Transaction data copied to clipboard.");
+  } catch (err) {
+    alert("Failed to copy data. Please try again!");
+  }
+}
+
+// Importing JSON:
+importBtn.addEventListener("click", (e) => {
+  const data = prompt("Import the data below: ");
+  importData(data);
+});
+
+function importData(data) {
+  localStorage.setItem("allTransactions", data);
+  loadTransactions();
+}
