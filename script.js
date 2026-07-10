@@ -108,6 +108,13 @@ function filterTransactions() {
       filteredArray = AllTransactions.filter((t) => t.category === filter);
     }
   }
+  if (filteredArray.length === 0) {
+    noData.style.display = "flex";
+    transactions.style.display = "none";
+  } else {
+    noData.style.display = "none";
+    transactions.style.display = "block";
+  }
   renderTransactions(filteredArray);
 }
 
@@ -123,6 +130,13 @@ function searchTransactions() {
       return true;
     }
   });
+  if (searchedTransaction.length === 0) {
+    noData.style.display = "flex";
+    transactions.style.display = "none";
+  } else {
+    noData.style.display = "none";
+    transactions.style.display = "block";
+  }
   renderTransactions(searchedTransaction);
 }
 
@@ -256,15 +270,17 @@ exportBtn.addEventListener("click", (e) => {
 
 async function exportData() {
   const data = localStorage.getItem("allTransactions");
-  if (!data) {
+  if (!data || data.length === 0) {
+    exportBtn.disabled = true;
+    exportBtn.style.cursor = "not-allowed"
     alert("No transaction data available");
-  }
-
-  try {
-    await navigator.clipboard.writeText(data);
-    alert("Transaction data copied to clipboard.");
-  } catch (err) {
-    alert("Failed to copy data. Please try again!");
+  } else {
+    try {
+      await navigator.clipboard.writeText(data);
+      alert("Transaction data copied to clipboard.");
+    } catch (err) {
+      alert("Failed to copy data. Please try again!");
+    }
   }
 }
 
