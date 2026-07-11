@@ -13,7 +13,31 @@
         rel="stylesheet">
 </head>
 
-<body>
+<body class="dark">
+    <div class="navbar">
+        <div class="logo">Finance Tracker</div>
+        <div class="theme"><button class="theme-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="light-mode">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="m4.93 4.93 1.41 1.41"></path>
+                    <path d="m17.66 17.66 1.41 1.41"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+                    <path d="m6.34 17.66-1.41 1.41"></path>
+                    <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="dark-mode">
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
     <div class="container">
         <div class="userInput">
             <div style="font-size: 18px; font-weight: 600;">→ Current Balance: </div>
@@ -33,17 +57,23 @@
                     <label style="font-weight: 400; font-size: 20px;" for="category">Category:</label>
                     <select id="category" class="category">
                         <option value="salary">Salary</option>
+                        <option value="freelance">Freelance</option>
                         <option value="food">Food</option>
                         <option value="transport">Transport</option>
                         <option value="shopping">Shopping</option>
                         <option value="utilities">Utilities</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="gifts">Gifts</option>
                         <option value="others">Others</option>
                     </select>
                 </div>
                 <div style="display: flex; gap: 12px;">
                     <div><button class="addBtn">Add Transaction</button></div>
-                    <div><button class="export">Export <span style="font-size: 10px; padding-right: 5px;">.JSON</span>⤒</button></div>
-                    <div><button class="import">Import <span style="font-size: 10px; padding-right: 5px;">.JSON</span>⤓</button></div>
+                    <div><button class="export">Export <span
+                                style="font-size: 10px; padding-right: 5px;">.JSON</span>⤒</button></div>
+                    <div><button class="import">Import <span
+                                style="font-size: 10px; padding-right: 5px;">.JSON</span>⤓</button></div>
                 </div>
             </div>
         </div>

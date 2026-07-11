@@ -16,6 +16,8 @@ const InFilter = document.querySelector(".filter");
 const InSearch = document.querySelector(".search input");
 const exportBtn = document.querySelector(".export");
 const importBtn = document.querySelector(".import");
+const themeToggle = document.querySelector(".theme-toggle");
+const body = document.querySelector("body");
 
 let AllTransactions = [];
 // Getting AllTransactions(if any) from the localStorage:
@@ -32,6 +34,7 @@ function loadTransactions() {
   }
   renderTransactions(AllTransactions);
 }
+
 function renderTransactions(data = AllTransactions) {
   transactionList.innerHTML = "";
   // adding transactions to transaction-list
@@ -246,9 +249,6 @@ function saveTransactions() {
   localStorage.setItem("allTransactions", JSON.stringify(AllTransactions));
 }
 
-// calling this function every time the page loads:
-loadTransactions();
-
 // Exporting JSON:
 exportBtn.addEventListener("click", (e) => {
   exportData();
@@ -278,3 +278,29 @@ function importData(data) {
   localStorage.setItem("allTransactions", data);
   loadTransactions();
 }
+
+// calling this function every time the page loads:
+loadTransactions();
+
+function loadTheme() {
+  const savedTheme = localStorage.getItem("theme");
+  body.classList.remove("dark", "light");
+
+  if (savedTheme === null) {
+    body.classList.add("dark");
+  } else {
+    body.classList.add(savedTheme);
+  }
+}
+
+loadTheme();
+
+themeToggle.addEventListener("click", (e) => {
+  body.classList.toggle("dark");
+  body.classList.toggle("light");
+  if (body.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+});
