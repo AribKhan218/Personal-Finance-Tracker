@@ -1,7 +1,12 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: "poppins";
 }
 
@@ -26,10 +31,10 @@ body {
 }
 
 .navbar {
-  height: 40px;
+  height: 70px;
   padding: 20px;
   color: #ffffff;
-  background-color: rgb(101, 23, 165);
+  background-color: #4f46e5;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,10 +62,20 @@ body {
 .container {
   margin: 80px;
   padding: 40px;
-  border: 2px solid black;
   display: flex;
   flex-direction: column;
 }
+
+.dark .container {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+}
+
+.light .container {
+  border-radius: 12px;
+  background-color: #f8fafc;
+}
+
 .userInput {
   display: flex;
   flex-direction: column;
@@ -300,7 +315,6 @@ body {
 }
 
 .transaction-list {
-  /* background-color: #272727; */
   border: 1px solid black;
   margin-top: 10px;
   padding: 20px 20px;
@@ -311,6 +325,24 @@ body {
   grid-template-columns: repeat(6, 1fr);
   padding: 10px 0;
   border-bottom: 1px solid black;
+}
+
+.light .transaction:nth-child(even) {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.dark .transaction:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.light .transaction:hover {
+  transition: background-color 0.3s ease;
+  background-color: #e1d6c438;
+}
+
+.dark .transaction:hover {
+  transition: background-color 0.3s ease;
+  background-color: #1e293b;
 }
 
 .actions {
@@ -329,4 +361,54 @@ body {
 }
 .actions div:hover {
   transform: translateY(-10%);
+}
+
+/* MEDIA QUERIES: */
+
+@media screen and (max-width: 768px) {
+  .container {
+    margin: 24px;
+    padding: 24px;
+  }
+
+  .inputs {
+    flex-direction: column;
+  }
+
+  .inputs > * {
+    width: 100%;
+  }
+
+  .dropdowns {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .addInOut {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .makeFlex {
+    flex-direction: column;
+  }
+
+  .find_filter {
+    flex-direction: column;
+  }
+
+  .rwd_filter {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .transactions {
+    padding: 0;
+  }
+
+  .transaction {
+    display: flex;
+    flex-direction: column;
+  }
 }

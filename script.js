@@ -9,6 +9,7 @@ const Income = document.querySelector(".income");
 const Expense = document.querySelector(".expense");
 const noData = document.querySelector(".noData");
 const transactions = document.querySelector(".transactions");
+const transactionHeaders = document.querySelector(".transactions-header")
 const transactionList = document.querySelector(".transaction-list");
 const actions = document.querySelector(".actions");
 const inputs = document.querySelectorAll("input");
@@ -35,7 +36,7 @@ function loadTransactions() {
   renderTransactions(AllTransactions);
 }
 
-function renderTransactions(data = AllTransactions) {
+function renderDesktopTransactions(data = AllTransactions) {
   transactionList.innerHTML = "";
   // adding transactions to transaction-list
   data.forEach((transaction, index) => {
@@ -48,10 +49,55 @@ function renderTransactions(data = AllTransactions) {
                                     <div class="actions">
                                     <div><img style="background-size: contain; width: 30px; height: 30px;" class="edit" src="assets/pen.png" alt=""></div>
                                         <div><img style="background-size: contain; width: 30px; height: 30px;" class="delete" src="assets/delete.png" alt=""></div>
-                                        </div>
-                                        </div>`;
+                                    </div>
+                              </div>`;
     transactionList.innerHTML += transactionHTML;
   });
+}
+
+function renderMobileTransactions(data = AllTransactions) {
+  transactionHeaders.style.display = "none"
+  transactionList.innerHTML = "";
+  // adding transactions to transaction-list
+  data.forEach((transaction, index) => {
+    const transactionHTML = `<div class="transaction" data-index="${index}">
+                                <div class="description">${transaction.description}</div>
+
+                                <div class="info">
+                                    <span>Amount:</span>
+                                    <span>$${transaction.amount}</span>
+                                </div>
+                                <div class="info">
+                                    <span>Type:</span>
+                                    <span>${transaction.type}</span>
+                                </div>
+
+                                <div class="info">
+                                    <span>Category:</span>
+                                    <span>${transaction.category}</span>
+                                </div>
+
+                                <div class="info">
+                                    <span>Time:</span>
+                                    <span>${transaction.timeStamps.replace("T", ", ")}</span>
+                                </div>
+
+                                <div class="actions">
+                                    <div><img style="background-size: contain; width: 30px; height: 30px;" class="edit" src="assets/pen.png" alt=""></div>
+                                        <div><img style="background-size: contain; width: 30px; height: 30px;" class="delete" src="assets/delete.png" alt=""></div>
+                                    </div>
+                                </div>
+                            </div>`;
+    transactionList.innerHTML += transactionHTML;
+  });
+}
+
+function renderTransactions(data = AllTransactions) {
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    renderMobileTransactions(data);
+  } else {
+    renderDesktopTransactions(data);
+  }
 }
 
 function calculateTotals() {
@@ -272,7 +318,7 @@ async function exportData() {
   const data = localStorage.getItem("allTransactions");
   if (!data || data.length === 0) {
     exportBtn.disabled = true;
-    exportBtn.style.cursor = "not-allowed"
+    exportBtn.style.cursor = "not-allowed";
     alert("No transaction data available");
   } else {
     try {
