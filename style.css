@@ -38,6 +38,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo {
@@ -410,5 +413,8 @@ body {
   .transaction {
     display: flex;
     flex-direction: column;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 10px;
   }
 }
